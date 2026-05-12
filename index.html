@@ -1,159 +1,676 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>html-ppt skill 介绍</title>
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #121a33;
-      --panel-2: #172044;
-      --text: #e8ecff;
-      --muted: #9aa7d6;
-      --accent: #7c9cff;
-      --accent-2: #6ee7ff;
-      --line: rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 24px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(124,156,255,0.24), transparent 28%),
-        radial-gradient(circle at top right, rgba(110,231,255,0.18), transparent 22%),
-        linear-gradient(180deg, #090d19 0%, #0b1020 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 64px; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-      align-items: stretch;
-      margin-top: 12px;
-    }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-    .hero-main { padding: 36px; }
-    .eyebrow {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(124,156,255,0.14);
-      color: #cdd8ff;
-      font-size: 14px;
-      border: 1px solid rgba(124,156,255,0.2);
-    }
-    h1 { font-size: clamp(38px, 7vw, 68px); line-height: 1.02; margin: 18px 0 16px; letter-spacing: -0.04em; }
-    .lead { font-size: 18px; color: var(--muted); max-width: 58ch; }
-    .hero-side { padding: 24px; display: grid; gap: 14px; }
-    .metric {
-      padding: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-    }
-    .metric b { display:block; font-size: 28px; margin-bottom: 6px; }
-    .section { margin-top: 24px; padding: 28px; }
-    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .tile { padding: 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 18px; }
-    .tile h3 { margin: 0 0 10px; font-size: 18px; }
-    .tile p, li { color: var(--muted); }
-    .steps { display:grid; gap: 14px; }
-    .step {
-      display:grid; grid-template-columns: 72px 1fr; gap: 16px; align-items:start;
-      padding: 18px; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--line);
-    }
-    .num {
-      width: 56px; height: 56px; border-radius: 16px; display:grid; place-items:center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#081022; font-weight: 800; font-size: 20px;
-    }
-    pre {
-      margin: 0; padding: 18px; overflow:auto; background: #081022; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08);
-      color: #d6e3ff;
-      font-size: 14px;
-    }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-    .footer {
-      margin-top: 24px; text-align:center; color: var(--muted); font-size: 14px;
-      padding: 20px 0 0;
-    }
-    @media (max-width: 900px) {
-      .hero, .grid { grid-template-columns: 1fr; }
-      .hero-main { padding: 26px; }
-      .section { padding: 22px; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>王德开 · 数据科学</title>
+<style>
+:root {
+  --bg: #eef1f7;
+  --card: rgba(255,255,255,0.88);
+  --card2: rgba(255,255,255,0.65);
+  --text: #0f1923;
+  --muted: #8896a7;
+  --accent: #3b6fe8;
+  --accent-light: #dbeafe;
+  --accent2: #10b981;
+  --accent3: #f59e0b;
+  --line: rgba(0,0,0,0.07);
+  --line2: rgba(0,0,0,0.05);
+  --shadow: 0 2px 8px rgba(0,0,0,0.05), 0 8px 32px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Ambient background ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse at 8% 5%, rgba(59,111,232,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 92% 95%, rgba(16,185,129,0.05) 0%, transparent 50%),
+    var(--bg);
+}
+
+/* ── Layout ── */
+.wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 40px 20px 64px; }
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Header grid ── */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.card:hover { box-shadow: var(--shadow-lg); }
+
+/* ── Hero card ── */
+.hero-card { padding: 34px 32px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(16,185,129,0.09);
+  border: 1px solid rgba(16,185,129,0.22);
+  color: var(--accent2);
+  font-size: 12px; padding: 5px 13px;
+  border-radius: 999px; margin-bottom: 16px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.badge:hover { background: rgba(16,185,129,0.14); box-shadow: 0 0 16px rgba(16,185,129,0.1); }
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent2);
+  animation: breathe 2.5s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+}
+
+.name-wrap { margin-bottom: 14px; }
+.name {
+  font-size: clamp(38px, 6vw, 60px);
+  font-weight: 800;
+  line-height: 1.05;
+  background: linear-gradient(125deg, #0f1923 0%, #2563eb 45%, #0ea5e9 80%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  margin-bottom: 3px;
+}
+.title {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+.summary {
+  color: #4a5568;
+  font-size: 14.5px;
+  line-height: 1.85;
+  max-width: 58ch;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.contacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.contact-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid var(--line);
+  color: #4a5568;
+  font-size: 13px;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.contact-chip:hover {
+  border-color: rgba(59,111,232,0.22);
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 2px 12px rgba(59,111,232,0.08);
+  transform: translateY(-2px);
+  color: var(--accent);
+}
+.contact-chip svg { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+
+/* ── Side card ── */
+.side-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mini-card {
+  background: var(--card2);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.mini-card:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  border-color: rgba(59,111,232,0.12);
+}
+.mini-card h3 {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill {
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.22s ease;
+  cursor: default;
+}
+.pill:hover { transform: translateY(-2px) scale(1.04); }
+.pill-purple { background: rgba(59,111,232,0.1); border: 1px solid rgba(59,111,232,0.18); color: #2563eb; }
+.pill-purple:hover { background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(59,111,232,0.25); }
+.pill-green { background: rgba(16,185,129,0.09); border: 1px solid rgba(16,185,129,0.18); color: #059669; }
+.pill-green:hover { background: #059669; color: #fff; box-shadow: 0 4px 14px rgba(16,185,129,0.25); }
+.pill-orange { background: rgba(245,158,11,0.09); border: 1px solid rgba(245,158,11,0.18); color: #d97706; }
+.pill-orange:hover { background: #d97706; color: #fff; box-shadow: 0 4px 14px rgba(217,119,6,0.25); }
+
+/* ── Code decoration ── */
+.code-block {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: #8896a7;
+  margin-top: 12px;
+  overflow-x: auto;
+  line-height: 1.8;
+}
+.code-block .k { color: #9333ea; }
+.code-block .v { color: #059669; }
+.code-block .c { color: #cbd5e1; }
+
+/* ── Sections ── */
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f1923;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 10px rgba(59,111,232,0.4);
+  flex-shrink: 0;
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(59,111,232,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 20px rgba(59,111,232,0.7); }
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.panel { padding: 24px; margin-bottom: 20px; }
+
+/* ── Timeline ── */
+.timeline { display: grid; gap: 12px; }
+.exp-item {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.exp-item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), #60a5fa);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+.exp-item:hover {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(59,111,232,0.12);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.exp-item:hover::before { transform: scaleY(1); }
+.exp-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; align-items: baseline; }
+.exp-item h3 { font-size: 15.5px; color: #0f1923; margin: 0; font-weight: 600; }
+.exp-meta { font-size: 12.5px; color: var(--muted); white-space: nowrap; font-family: 'Courier New', monospace; }
+.exp-company {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+  padding-bottom: 1px;
+}
+.exp-company:hover { border-color: var(--accent); color: #1d4ed8; }
+ul { padding-left: 18px; color: #4a5568; line-height: 1.8; font-size: 13.5px; }
+ul li + li { margin-top: 3px; }
+
+/* ── Education ── */
+.edu-grid { display: grid; gap: 12px; }
+.edu-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+}
+.edu-card:hover {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(59,111,232,0.1);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+  transform: translateY(-1px);
+}
+.edu-school { font-size: 16px; font-weight: 700; color: #0f1923; margin-bottom: 2px; }
+.edu-degree { font-size: 13.5px; color: var(--accent2); margin-bottom: 6px; font-weight: 500; }
+.edu-courses { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+/* ── Patent ── */
+.patent-box {
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(140deg, rgba(59,111,232,0.06), rgba(16,185,129,0.04));
+  border: 1px solid rgba(59,111,232,0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.patent-box::after {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(59,111,232,0.08) 0%, transparent 70%);
+  transition: all 0.5s ease;
+}
+.patent-box:hover {
+  border-color: rgba(59,111,232,0.2);
+  box-shadow: 0 0 28px rgba(59,111,232,0.08);
+  transform: scale(1.01);
+}
+.patent-box:hover::after { top: -15px; right: -15px; transform: scale(1.3); }
+.patent-box h3 { color: var(--accent); font-size: 15px; margin-bottom: 7px; font-weight: 600; }
+.patent-box p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.patent-tag {
+  display: inline-block;
+  margin-top: 9px;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: rgba(59,111,232,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(59,111,232,0.15);
+  font-weight: 500;
+}
+
+/* ── Awards ── */
+.award {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line2);
+  font-size: 13.5px; color: #4a5568; line-height: 1.65;
+  transition: padding-left 0.2s;
+}
+.award:last-child { border-bottom: none; }
+.award:first-child { padding-top: 0; }
+.award:hover { padding-left: 6px; color: #0f1923; }
+.award-icon { font-size: 18px; flex-shrink: 0; }
+
+/* ── Skills bottom ── */
+.skills-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+/* ── Footer ── */
+.footer {
+  padding: 16px 22px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: var(--shadow);
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+.footer:hover { box-shadow: var(--shadow-lg); border-color: rgba(59,111,232,0.1); }
+.footer a { color: var(--accent); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.footer a:hover { color: #1d4ed8; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .header, .two-col { grid-template-columns: 1fr; }
+  .hero-card { padding: 26px 22px; }
+  .side-card { padding: 18px; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: 20px 12px 48px; }
+  .hero-card { padding: 22px 18px; }
+  .name { font-size: 36px; }
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="eyebrow">⚡ html-ppt skill · HTML 演示文稿生成工具</div>
-        <h1>把 PPT 变成<br/>可交互的 HTML 页面</h1>
-        <p class="lead">html-ppt skill 是一个面向幻灯片、演讲稿、分享页、小红书图文的模板化 HTML 演示工具。它强调主题、布局、动画、演讲者模式和键盘导航，让内容既能展示，也能讲。</p>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <section class="header">
+    <div class="card hero-card reveal">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        在线
       </div>
-      <aside class="card hero-side">
-        <div class="metric"><b>36</b><span>主题风格，覆盖商务、技术、小红书、学术等场景</span></div>
-        <div class="metric"><b>31</b><span>布局模板，可直接拼装出完整页面</span></div>
-        <div class="metric"><b>20+</b><span>Canvas FX 动效，适合做氛围感和转场</span></div>
-      </aside>
-    </section>
+      <div class="name-wrap">
+        <h1 class="name">王德开</h1>
+        <div class="title">数据分析 · 机器学习 · 上海</div>
+      </div>
+      <p class="summary">
+        华东师范大学计算机科学与技术硕士，5年数据分析经验，覆盖信贷风控、营销建模、BI 报表与用户分层全链路。主导海外多国用户营销模型、Uplift 响应模型等，具备良好海外业务场景下的数据驱动决策能力。
+      </p>
+      <div class="contacts">
+        <span class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          上海松江区
+        </span>
+        <a href="tel:17356549877" class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          17356549877
+        </a>
+        <a href="mailto:17356549877@163.com" class="contact-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          17356549877@163.com
+        </a>
+      </div>
+    </div>
 
-    <section class="card section">
-      <h2>它适合做什么</h2>
-      <div class="grid">
-        <div class="tile">
-          <h3>演讲 / 技术分享</h3>
-          <p>适合做带逐字稿的演讲型 deck，尤其适合需要 presenter mode 的场景。</p>
+    <aside class="card side-card">
+      <div class="mini-card reveal" style="transition-delay:0.06s">
+        <h3>擅长领域</h3>
+        <div class="pill-row">
+          <span class="pill pill-purple">用户分层建模</span>
+          <span class="pill pill-purple">A/B Test</span>
+          <span class="pill pill-purple">BI 报表搭建</span>
+          <span class="pill pill-green">XGBoost</span>
+          <span class="pill pill-green">Uplift 建模</span>
+          <span class="pill pill-green">营销 ROI 评估</span>
+          <span class="pill pill-orange">Python / Pandas</span>
+          <span class="pill pill-orange">SAS / SQL</span>
+          <span class="pill pill-orange">FineBI / Tableau</span>
         </div>
-        <div class="tile">
-          <h3>产品发布 / 商务汇报</h3>
-          <p>用 pitch-deck、corporate-clean、swiss-grid 等风格快速搭出正式展示页。</p>
+      </div>
+      <div class="mini-card reveal" style="transition-delay:0.12s">
+        <h3>技术栈</h3>
+        <div class="pill-row">
+          <span class="pill pill-purple">XGBoost</span>
+          <span class="pill pill-purple">Scikit-learn</span>
+          <span class="pill pill-green">Hive</span>
+          <span class="pill pill-green">Metabase</span>
+          <span class="pill pill-green">Tableau</span>
+          <span class="pill pill-orange">NLP</span>
+          <span class="pill pill-orange">知识图谱</span>
+          <span class="pill pill-orange">图对比学习</span>
         </div>
-        <div class="tile">
-          <h3>小红书图文 / 长页内容</h3>
-          <p>可以做成单页长图风格页面，适合内容传播、教程和分享稿。</p>
+      </div>
+      <div class="mini-card reveal" style="transition-delay:0.18s">
+        <h3>教育背景</h3>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:14px;font-weight:600;color:#0f1923;">华东师范大学</div>
+          <div style="font-size:12px;color:#10b981;margin-top:1px;">计算机科学与技术 · 硕士 · 2021–2026</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#0f1923;">安徽农业大学</div>
+          <div style="font-size:12px;color:#10b981;margin-top:1px;">应用统计学 · 本科 · 2017–2021</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Education row (full width) -->
+  <section class="card panel reveal" style="transition-delay:0.08s">
+    <div class="section-title">教育背景</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-school">华东师范大学</div>
+        <div class="edu-degree">计算机科学与技术 · 硕士 · 2021 – 2026</div>
+        <div class="edu-courses">主修：模式识别与机器学习、智能金融技术、自然语言处理与实践、量化金融、知识图谱</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">安徽农业大学</div>
+        <div class="edu-degree">应用统计学 · 本科 · 2017 – 2021</div>
+        <div class="edu-courses">主修：概率论与数理统计、Python、R、MySQL 数据库、时间序列分析、统计建模、多元统计分析</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work + Projects -->
+  <div class="two-col">
+    <section class="card panel reveal" style="transition-delay:0.12s">
+      <div class="section-title">工作经历</div>
+      <div class="timeline">
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>资深数据分析师</h3>
+            <div class="exp-meta">2025.08 – 至今</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <a href="https://www.jiayintech.cn" target="_blank" class="exp-company">嘉银科技</a>
+          </div>
+          <ul>
+            <li>主导印尼 Samir 项目运营全链路数据分析与报表治理，覆盖营销策略制定、活动效果追踪与用户行为分析，构建标准化数据监控体系。</li>
+            <li>基于 FineBI 搭建成本实时监控报表体系，实现运营渠道与营销活动成本结构的动态追踪与异常预警。</li>
+            <li>构建多元营销触达工具（电销、AI 营销、WABA）效能监控报表，系统评估不同触达方式对用户转化及成本的影响。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>数据分析师</h3>
+            <div class="exp-meta">2023.09 – 2025.08</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <a href="https://kn.group" target="_blank" class="exp-company">快牛智能</a>
+          </div>
+          <ul>
+            <li>主导印尼、墨西哥等四国用户价值分层体系构建，开发注册-授信-提现-复借 4 类营销意愿模型（首贷 KS 0.38，续贷 KS 0.56）。</li>
+            <li>设计多国营销活动评估框架，建立边际 ROI、边际 CPS 等指标监控体系，有效提升营销策略迭代频率。</li>
+            <li>基于 Metabase / Tableau 搭建多国家 BI 报表，实现各类转化数据的实时监控与预警。</li>
+            <li>基于 A/B Test 确定提额券、降息券等券营销阈值方案，墨西哥降息券 CPS 降低至 13%，转化率环比提升 35%。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>数据建模师</h3>
+            <div class="exp-meta">2022.08 – 2023.09</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <a href="https://www.8kesoft.com" target="_blank" class="exp-company">上海八客信息科技</a>
+          </div>
+          <ul>
+            <li>主导设计电销数据智能监控体系，开发自动化报表系统，实现日维度数据更新。</li>
+            <li>负责反欺诈模型全生命周期管理，通过规则引擎优化使模型误判率降低 18%。</li>
+            <li>参与杭州联合银行"普惠 e 贷"模型迭代，KS 提升 25%；参与上海农商银行"融 e 贷"线上运营。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>数据分析专员</h3>
+            <div class="exp-meta">2021.07 – 2022.07</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <a href="https://www.spdb.com.cn" target="_blank" class="exp-company">浦发银行信用卡中心</a>
+          </div>
+          <ul>
+            <li>使用 SAS 及 Python 向业务团队提供数据支持，包括常态化分期两金业务报表、坐席勤勉度分析等。</li>
+            <li>基于 Hive 数据库开展非常态化业务数据分析，支持空银团队直销、营销名单效果评估。</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="card section">
-      <h2>核心能力</h2>
-      <div class="steps">
-        <div class="step"><div class="num">1</div><div><strong>主题系统</strong><p>一套 token 驱动的设计语言，切换主题不用重写结构。</p></div></div>
-        <div class="step"><div class="num">2</div><div><strong>布局库</strong><p>直接复用现成布局，少写 CSS，多拼内容。</p></div></div>
-        <div class="step"><div class="num">3</div><div><strong>动画与特效</strong><p>支持 CSS 动画和 canvas 特效，做出更有表现力的页面。</p></div></div>
-        <div class="step"><div class="num">4</div><div><strong>演讲者模式</strong><p>可查看当前页、下一页、逐字稿和计时器，适合正式演示。</p></div></div>
+    <section class="card panel reveal" style="transition-delay:0.20s">
+      <div class="section-title">项目成果</div>
+      <div class="timeline">
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>促用户放款专项营销活动</h3>
+            <div class="exp-meta" style="color:var(--accent2);">嘉银科技</div>
+          </div>
+          <ul>
+            <li>针对未用信、已下单客群设计差异营销方案：促用信方案用信率环比提升 18%，风险保持稳定；促额度使用率方案额度使用率环比提升约 10%。</li>
+            <li>方案一对齐竞品中高额度且风险表现较好客群，通过临时额度覆盖实现大批量提额，t7 用信率达 22.17%（对照组 18.69%）。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>拒量客群捞回策略</h3>
+            <div class="exp-meta" style="color:var(--accent2);">嘉银科技</div>
+          </div>
+          <ul>
+            <li>联动模型团队实现拒量客群风险二次评估，日均营销客群约 30000 人，t7 登录率 10%，t7 放款率 2.5%（对照组：6%、1.3%）。</li>
+            <li>整体 CPS 控制在约 24%，有效平衡转化效果与获客成本。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>四国用户分层模型体系</h3>
+            <div class="exp-meta" style="color:var(--accent2);">快牛智能</div>
+          </div>
+          <ul>
+            <li>主导设计四国统一用户分层框架，基于 XGBoost 开发注册-授信等 4 类客群识别模型，KS 稳定在 0.35+。</li>
+            <li>整合用户行为、App 埋点、历史借贷等维度特征，墨西哥、菲律宾 CPS 整体降低 50%，ROI 提升约 30%。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>墨西哥 MGM 营销活动</h3>
+            <div class="exp-meta" style="color:var(--accent2);">快牛智能</div>
+          </div>
+          <ul>
+            <li>设计阶梯式邀请奖励（1/3/5 人分别获取 5/15/30 奖励），搭建全流程效果追踪报表，活动放款占比约 10%。</li>
+            <li>获客 CPS 压降至 25%，对比投放（40%）环比低 37%。</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-top">
+            <h3>Uplift 模型项目</h3>
+            <div class="exp-meta" style="color:var(--accent2);">快牛智能</div>
+          </div>
+          <ul>
+            <li>融合 X-Learner 元学习与差分响应建模，AUUC 线上表现稳定在 0.68。</li>
+            <li>识别补贴敏感用户（SLE 人群占比 28%），菲律宾利息折扣券场景下券成本降低约 50%，CPS 环比下降约 30%。</li>
+          </ul>
+        </div>
       </div>
     </section>
-
-    <section class="card section">
-      <h2>怎么用</h2>
-      <pre><code>npx skills add https://github.com/lewislulu/html-ppt-skill
-
-# 然后按模板创建 deck
-./scripts/new-deck.sh my-talk
-open examples/my-talk/index.html</code></pre>
-    </section>
-
-    <section class="card section">
-      <h2>一句话总结</h2>
-      <p class="lead">如果你想要的不只是“能显示的 PPT”，而是“能讲、能看、能切换风格、还能做成网页”的内容，html-ppt skill 就是干这个的。</p>
-    </section>
-
-    <div class="footer">HTML page generated for html-ppt skill intro · 2026</div>
   </div>
+
+  <!-- Patent + Awards -->
+  <div class="two-col">
+    <section class="card panel reveal" style="transition-delay:0.26s">
+      <div class="section-title">专利</div>
+      <div class="patent-box">
+        <h3>一种基于 DMH-Motif 的多模型融合异常检测方法</h3>
+        <p>融合 DMH-Motif 特征提取与多模型集成策略，适用于金融风控、用户行为异常识别等场景。</p>
+        <span class="patent-tag">发明专利</span>
+      </div>
+    </section>
+
+    <section class="card panel reveal" style="transition-delay:0.32s">
+      <div class="section-title">奖项荣誉</div>
+      <div class="award">
+        <span class="award-icon">🏆</span>
+        <span>2019 年安徽省市场调查大赛三等奖 — 主持《基于拼多多的农村地区电商发展分析》</span>
+      </div>
+      <div class="award">
+        <span class="award-icon">🏆</span>
+        <span>2020 年安徽省市场调查大赛三等奖 — 主持《疫情背景下线上教育发展分析》</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Skills + Eval -->
+  <section class="card panel reveal" style="padding-bottom:12px;transition-delay:0.38s">
+    <div class="section-title">技能证书与自我评价</div>
+    <div class="two-col" style="margin-bottom:0;">
+      <div>
+        <p style="color:#4a5568;font-size:14px;line-height:1.9;">
+          熟悉数据模型分析方法，掌握 Python 数据分析相关库（Numpy / Pandas / Scikit-learn 等）；
+          熟悉信贷领域业务知识，对反欺诈、风控、贷中贷后流程有较清晰认识；
+          主观能动性强，对数据分析与机器学习前沿算法（如知识图谱、图对比学习）有持续学习意愿。
+        </p>
+      </div>
+      <div>
+        <div class="mini-card" style="margin-bottom:10px;">
+          <h3>工具技能</h3>
+          <div class="skills-row">
+            <span class="pill pill-purple">Python</span>
+            <span class="pill pill-purple">Pandas</span>
+            <span class="pill pill-green">XGBoost</span>
+            <span class="pill pill-green">SAS</span>
+            <span class="pill pill-orange">Hive</span>
+            <span class="pill pill-orange">SQL</span>
+            <span class="pill pill-purple">FineBI</span>
+            <span class="pill pill-purple">Tableau</span>
+            <span class="pill pill-green">Scikit-learn</span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <h3>证书</h3>
+          <p style="color:#8896a7;font-size:13px;">全国计算机二级 C 语言 · CET-4/6 · 熟练使用 Office 办公软件</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer reveal" style="transition-delay:0.44s">
+    📞 <a href="tel:17356549877">17356549877</a>（微信同号）&nbsp;·&nbsp; ✉️ <a href="mailto:17356549877@163.com">17356549877@163.com</a>&nbsp;·&nbsp; 📍 上海市松江区
+  </div>
+
+</div>
+
+<script>
+/* ── Scroll reveal ── */
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  setTimeout(function() {
+    var hdr = document.querySelector('.hero-card');
+    if (hdr) hdr.classList.add('visible');
+  }, 180);
+})();
+</script>
 </body>
 </html>
